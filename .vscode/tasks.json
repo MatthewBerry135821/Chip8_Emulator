@@ -3,17 +3,17 @@
         {
             "type": "cppbuild",
             "label": "C/C++: g++.exe build active file",
-            "command": "g++",
+            "command": "make",
             "args": [
-                "-fdiagnostics-color=always",
+              /*  "-fdiagnostics-color=always",
                 "-I./SDL2/include/",
                 "-L./SDL2/lib/x64/",
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "${fileDirname}\\${fileBasenameNoExtension}",
                 "-lSDL2main",
-                "-lSDL2",
+                "-lSDL2",*/
             ],
             "options": {
                 "cwd": "${fileDirname}"
