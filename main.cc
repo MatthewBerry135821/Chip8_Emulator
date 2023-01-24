@@ -1,9 +1,9 @@
 #include <iostream>
 using namespace std;
 int main(){
+	//blurgh
 	while(true){
-		std::cout << "ABC" << std::endl;
-		std::cout << "123" << std::endl;
+		std::cout << "ABC" << std::endl;\
 	}
 	return 0;
 }
