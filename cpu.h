@@ -3,11 +3,11 @@
 #define CPU_H
 class Cpu{
     public:
-        Cpu(System *s = nullptr){system = s;};
+        Cpu(System *s);
         void processNextInstruction();
     private:
         System *system;
-        uint8_t stack[64];
+        uint16_t stack[16];
         uint8_t generalPurposeRegisters[0xF];
         uint16_t registerIndex;
         bool registerVF;
