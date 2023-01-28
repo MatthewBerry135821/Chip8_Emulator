@@ -53,6 +53,9 @@ void Cpu::processNextInstruction(){
 
             }
         break;
+        case 0xA000:
+             registerIndex = opCode & 0x0FFF;   
+        break;
         
     }
     programCounter += 2;//programCounter stores location of the currently executing op code so it should be updated after it has been processed not when loaded
