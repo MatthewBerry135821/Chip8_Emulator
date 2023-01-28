@@ -11,7 +11,7 @@ void Cpu::processNextInstruction(){
     opCode = system.memory.loadIntruction(programCounter);
     switch(opCode & 0xF000){//switches the first nibble in the opCode. This allows instructions with parameters to implemented easier 
         case 0x1000:
-            
+            programCounter = (opCode & 0x0FFF);
         break;
         case 0x2000:
 
@@ -52,6 +52,12 @@ void Cpu::processNextInstruction(){
 
 
             }
+        break;
+        case 0xA000:
+             registerIndex = opCode & 0x0FFF;   
+        break;
+        case 0xB000:
+            programCounter = (opCode & 0x0FFF) + generalPurposeRegisters[0];
         break;
         
     }
