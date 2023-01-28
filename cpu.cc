@@ -53,6 +53,9 @@ void Cpu::processNextInstruction(){
 
             }
         break;
+        case 0xA000:
+             registerIndex = opCode & 0x0FFF;   
+        break;
         case 0xB000:
             programCounter = (opCode & 0x0FFF) + generalPurposeRegisters[0];
         break;
