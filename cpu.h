@@ -12,7 +12,7 @@ class Cpu{
     private:
         System *system;
         uint16_t stack[16];
-        uint8_t generalPurposeRegisters[0xF]; //V in Cowdog's doc
+        uint8_t generalRegisters[0xF]; //V in Cowdog's doc
         uint16_t registerIndex;
         bool registerVF;
         uint8_t delayTimer;
