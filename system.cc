@@ -3,7 +3,10 @@
 #include <cstdint>
 using namespace std;
 
-
+System::System(){
+    Cpu c(this);
+    cpu =c;
+}
 void System::testImplementation(){
     int testType;
     do{
@@ -18,7 +21,7 @@ void System::testImplementation(){
                 cout << "what opCode test? ";
                 cin >> opCode;
                 memory.testForceSetNextInstruction(opCode);
-                cpu.processNextInstruction(this);
+                cpu.processNextInstruction();
             break;
             case 2:
                 cpu.dumpState();

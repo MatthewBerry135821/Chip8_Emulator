@@ -8,12 +8,13 @@
 #define SYSTEM_H
 class System{
     public:
+        System();
         void runProgram(std::string fileName);
         void testImplementation();
-        Memory memory;
+        friend class Cpu;
     private:
         Screen screen;
-        //Cpu cpu(this);
+        Memory memory;
         Cpu cpu;
 };
 #endif

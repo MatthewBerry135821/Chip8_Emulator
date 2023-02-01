@@ -4,14 +4,14 @@
 
 using namespace std;
 
-Cpu::Cpu(){
-    //system = s;
+Cpu::Cpu(System *s){
+    system = s;
     programCounter = 0x200;//start of program
     stackPointer = 0;//start of stack
     soundTimer = 0;//disabled
     stackPointer = 0;//disabled
 }
-void Cpu::processNextInstruction(System *system){
+void Cpu::processNextInstruction(){
     uint16_t opCode;
     opCode = system->memory.loadIntruction(programCounter);
     switch(opCode & 0xF000){//switches the first nibble in the opCode. This allows instructions with parameters to implemented easier 

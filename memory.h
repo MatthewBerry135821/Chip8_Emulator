@@ -1,5 +1,6 @@
 #include <string>
 #include <cstdint>
+#include "cpu.h"
 
 #ifndef MEMORY_H
 #define MEMORY_H
@@ -15,6 +16,7 @@ class Memory{
         void storeByte(uint16_t memoryLocation, uint8_t value);
 
         void testForceSetNextInstruction(uint16_t opCode);
+
     private:
         uint8_t data[0xFFF];
 };

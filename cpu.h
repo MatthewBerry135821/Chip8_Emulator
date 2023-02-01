@@ -6,11 +6,11 @@ class System;
 #define CPU_H
 class Cpu{
     public:
-        Cpu();
+        Cpu(System *s = nullptr);
         void dumpState();
-        void processNextInstruction(System *system);
+        void processNextInstruction();
     private:
-        //System &system;
+        System *system;
         uint16_t stack[16];
         uint8_t generalPurposeRegisters[0xF]; //V in Cowdog's doc
         uint16_t registerIndex;
