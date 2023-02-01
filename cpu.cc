@@ -20,7 +20,7 @@ void Cpu::processNextInstruction(){
         case 0x5000:
         //skip mean go to next thing on list
              
-            if(generalPurposeRegisters[(opCode & 0x0F00) >> 8] == generalPurposeRegisters[(opCode & 0x0F0) >> 4]){
+            if(generalPurposeRegisters[(opCode & 0x0F00)>> 8] == generalPurposeRegisters[(opCode & 0x0F0) >> 4]){
                 programCounter+=2;
             }
         break;
@@ -30,27 +30,46 @@ void Cpu::processNextInstruction(){
                 case 0x0000:
                     generalPurposeRegisters[(opCode & 0x0F00) >> 8] = generalPurposeRegisters[(opCode & 0x00F0) >> 4];
                 break;
-
+                
                 case 0x0001:
-                    generalPurposeRegisters[(opCode & 0x0F00) >> 8] = generalPurposeRegisters[(opCode & 0x0F00) >> 8] | generalPurposeRegisters[(opCode & 0x00F0) >> 4];
-                    
+                    generalPurposeRegisters[(opCode & 0x0F00) >> 8] = generalPurposeRegisters[(opCode & 0x0F00) >> 8] | generalPurposeRegisters[(opCode & 0x00F0) >> 4];    
                 break;
+                
                 case 0x0002:
+                    generalPurposeRegisters[(opCode & 0x0F00) >> 8] = generalPurposeRegisters[(opCode & 0x0F00) >> 8] & generalPurposeRegisters[(opCode & 0x00F0) >> 4];
                 break;
+                
                 case 0x0003:
+                    generalPurposeRegisters[(opCode & 0x0F00) >> 8] = generalPurposeRegisters[(opCode & 0x0F00) >> 8] ^ generalPurposeRegisters[(opCode & 0x00F0) >> 4];
                 break;
+                
                 case 0x0004:
+                    registerVF = (generalPurposeRegisters[(opCode & 0x0F00) >> 8] + generalPurposeRegisters[(opCode & 0x00F0) >> 4]) > 0xFF;
+                    generalPurposeRegisters[(opCode & 0x0F00) >> 8] = generalPurposeRegisters[(opCode & 0x0F00) >> 8] + generalPurposeRegisters[(opCode & 0x00F0) >> 4];
                 break;
+                
+                case 0x0005:
+                    registerVF = generalPurposeRegisters[(opCode & 0x0F00) >> 8] > generalPurposeRegisters[(opCode & 0x00F0) >> 4];
+                    generalPurposeRegisters[(opCode & 0xF000) >> 8] = generalPurposeRegisters[(opCode & 0x0F00) >> 8] - generalPurposeRegisters[(opCode & 0x00F0) >> 4];
+                break;
+                
                 case 0x0006:
+                    registerVF = generalPurposeRegisters[(opCode & 0x0F00) >> 8] & 0x01 == 0x01;
+                    generalPurposeRegisters[(opCode & 0x0F00) >> 8] = generalPurposeRegisters[(opCode & 0x0F00) >> 8] / 2;
                 break;
+                
                 case 0x0007:
+                    registerVF = generalPurposeRegisters[(opCode & 0x00F0) >> 4] > generalPurposeRegisters[(opCode & 0x0F00) >> 8];
+                    generalPurposeRegisters[(opCode & 0x0F00) >> 8] = generalPurposeRegisters[(opCode & 0x00F0) >> 4] - generalPurposeRegisters[(opCode & 0x0F00) >> 8];
                 break;
+                
                 case 0x000E:
+                    registerVF = generalPurposeRegisters[(opCode & 0x0F00) >> 8] & 0x80 == 0x80;
+                    generalPurposeRegisters[(opCode & 0x0F00) >> 8] = generalPurposeRegisters[(opCode & 0x0F00) >> 8] * 2;
                 break;
+                
                 default:
                 break;
-
-
             }
         break;
         
