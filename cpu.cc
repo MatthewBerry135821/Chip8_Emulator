@@ -58,7 +58,30 @@ void Cpu::processNextInstruction(){
         break;
         case 0xB000:
             programCounter = (opCode & 0x0FFF) + generalPurposeRegisters[0];
-        break;
+            break;
+        case 0xF000:
+            switch(opCode & 0x00FF){
+                case 0xF007:
+                    generalPurposeRegisters[opCode & 0x0F00 >> 8] = delayTimer;
+                    break;
+                case 0x000A:
+                case 0x0015:
+                    delayTimer = generalPurposeRegisters[opCode & 0x0F00 >> 8];
+                    break;
+                case 0x0018:
+                    soundTimer = generalPurposeRegisters[opCode & 0x0F00 >> 8];
+                    break;
+                case 0x001E:
+                    registerIndex += generalPurposeRegisters[opCode & 0x0F00 >> 8];
+                    break;
+                case 0x0029:
+                    registerIndex = 
+                case 0x0033:
+                     
+                    
+
+                case 0x0055:
+            }
 
         
     }
