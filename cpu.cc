@@ -1,5 +1,10 @@
 #include "cpu.h"
-Cpu::Cpu(System *s = nullptr){
+#include <cstdint>
+#include <iostream>
+
+using namespace std;
+
+Cpu::Cpu(System *s){
     system = s;
     programCounter = 0x200;//start of program
     stackPointer = 0;//start of stack
@@ -8,7 +13,7 @@ Cpu::Cpu(System *s = nullptr){
 }
 void Cpu::processNextInstruction(){
     uint16_t opCode;
-    opCode = system.memory.loadIntruction(programCounter);
+    opCode = system->memory.loadIntruction(programCounter);
     switch(opCode & 0xF000){//switches the first nibble in the opCode. This allows instructions with parameters to implemented easier 
         case 0x1000:
             
@@ -86,4 +91,21 @@ void Cpu::processNextInstruction(){
         
     }
     programCounter += 2;//programCounter stores location of the currently executing op code so it should be updated after it has been processed not when loaded
+}
+void Cpu::dumpState(){
+    cout << "registerIndex: " << (int)registerIndex << endl;
+    cout << "registerVF: " << (int)registerVF << endl;
+    cout << "delayTimer: " << (int)delayTimer << endl;
+    cout << "soundTimer: " << (int)soundTimer << endl;
+    cout << "stackPointer: " << (int)stackPointer << endl;
+    cout << "programCounter: " << (int)programCounter << endl;
+    cout << "stack:" << endl;
+    for(int i=0; i<16; ++i){
+        cout << "\t" << i << ": " << (int)stack[i] << endl;
+    }
+    cout << "generalPurposeRegisters:" << endl;
+    for(int i=0; i<0xF; ++i){
+        cout << "\t" << i << ": " << (int)generalPurposeRegisters[i] << endl;
+    }
+    cout << "f";
 }

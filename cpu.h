@@ -1,9 +1,13 @@
-#include "system.h"
+//#include "system.h"
+#include <cstdint>
+class System;
+#include <cstdint>
 #ifndef CPU_H
 #define CPU_H
 class Cpu{
     public:
-        Cpu(System *s);
+        Cpu(System *s = nullptr);
+        void dumpState();
         void processNextInstruction();
     private:
         System *system;
@@ -16,4 +20,5 @@ class Cpu{
         uint8_t stackPointer;
         uint16_t programCounter;
 };
+#include "system.h"
 #endif
