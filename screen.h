@@ -11,7 +11,7 @@ class Screen{
          * @param x 
          * @param y 
          */
-        drawByte(uint8_t sprite, int x, int y);
+        void drawByte(uint8_t sprite, int x, int y);
     private:
 };
 #endif
