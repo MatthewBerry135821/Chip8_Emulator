@@ -20,7 +20,7 @@ void Cpu::processNextInstruction(){
         case 0x5000:
         //skip mean go to next thing on list
              
-            if(generalPurposeRegisters[(opCode & 0x0F00)>> 8] == generalPurposeRegisters[(opCode & 0x0F0) >> 4]){
+            if(generalPurposeRegisters[(opCode & 0x0F00) >> 8] == generalPurposeRegisters[(opCode & 0x0F0) >> 4]){
                 programCounter+=2;
             }
         break;
