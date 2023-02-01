@@ -25,7 +25,7 @@ void Cpu::processNextInstruction(){
         case 0x5000:
         //skip mean go to next thing on list
              
-            if(generalPurposeRegisters[(opCode & 0x0F00) >> 8] == generalPurposeRegisters[(opCode & 0x0F0) >> 4]){
+            if(generalRegisters[(opCode & 0x0F00) >> 8] == generalRegisters[(opCode & 0x0F0) >> 4]){
                 programCounter+=2;
             }
         break;
@@ -33,11 +33,11 @@ void Cpu::processNextInstruction(){
         case 0x8000:
             switch(opCode & 0x000F){
                 case 0x0000:
-                    generalPurposeRegisters[(opCode & 0x0F00) >> 8] = generalPurposeRegisters[(opCode & 0x00F0) >> 4];
+                    generalRegisters[(opCode & 0x0F00) >> 8] = generalRegisters[(opCode & 0x00F0) >> 4];
                 break;
 
                 case 0x0001:
-                    generalPurposeRegisters[(opCode & 0x0F00) >> 8] = generalPurposeRegisters[(opCode & 0x0F00) >> 8] | generalPurposeRegisters[(opCode & 0x00F0) >> 4];
+                    generalRegisters[(opCode & 0x0F00) >> 8] = generalRegisters[(opCode & 0x0F00) >> 8] | generalRegisters[(opCode & 0x00F0) >> 4];
                     
                 break;
                 case 0x0002:
@@ -62,33 +62,40 @@ void Cpu::processNextInstruction(){
              registerIndex = opCode & 0x0FFF;   
         break;
         case 0xB000:
-            programCounter = (opCode & 0x0FFF) + generalPurposeRegisters[0];
+            programCounter = (opCode & 0x0FFF) + generalRegisters[0];
             break;
         case 0xF000:
             switch(opCode & 0x00FF){
                 case 0xF007:
-                    generalPurposeRegisters[opCode & 0x0F00 >> 8] = delayTimer;
-                    break;
+                    generalRegisters[opCode & 0x0F00 >> 8] = delayTimer;
+                break;
+
                 case 0x000A:
+                break;
+
                 case 0x0015:
-                    delayTimer = generalPurposeRegisters[opCode & 0x0F00 >> 8];
-                    break;
+                    delayTimer = generalRegisters[opCode & 0x0F00 >> 8];
+                break;
+
                 case 0x0018:
-                    soundTimer = generalPurposeRegisters[opCode & 0x0F00 >> 8];
-                    break;
+                    soundTimer = generalRegisters[opCode & 0x0F00 >> 8];
+                break;
+
                 case 0x001E:
-                    registerIndex += generalPurposeRegisters[opCode & 0x0F00 >> 8];
-                    break;
+                    registerIndex += generalRegisters[opCode & 0x0F00 >> 8];
+                break;
+
                 case 0x0029:
-                    registerIndex =  
+                    registerIndex =  0;
+                break;
+
                 case 0x0033:
-                     
-                    
+                break;
 
                 case 0x0055:
+                break;
             }
-
-        
+        break;
     }
     programCounter += 2;//programCounter stores location of the currently executing op code so it should be updated after it has been processed not when loaded
 }
@@ -103,9 +110,9 @@ void Cpu::dumpState(){
     for(int i=0; i<16; ++i){
         cout << "\t" << i << ": " << (int)stack[i] << endl;
     }
-    cout << "generalPurposeRegisters:" << endl;
+    cout << "generalRegisters:" << endl;
     for(int i=0; i<0xF; ++i){
-        cout << "\t" << i << ": " << (int)generalPurposeRegisters[i] << endl;
+        cout << "\t" << i << ": " << (int)generalRegisters[i] << endl;
     }
     cout << "f";
 }
