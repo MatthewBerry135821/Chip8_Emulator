@@ -30,11 +30,11 @@ void Cpu::processNextInstruction(){
         break;
         
         case 0x6000: //LD Vx, byte
-            generalPurposeRegisters[(opCode & 0x0F00) >> 8] = opCode & 0x00FF;
+            generalRegisters[(opCode & 0x0F00) >> 8] = opCode & 0x00FF;
         break;            
         
         case 0x7000: //ADD Vx, byte
-            generalPurposeRegisters[(opCode & 0x0F00) >> 8] = generalPurposeRegisters[(opCode & 0x0F00) >> 8] + opCode & 0x00FF;
+            generalRegisters[(opCode & 0x0F00) >> 8] = generalRegisters[(opCode & 0x0F00) >> 8] + opCode & 0x00FF;
         break;
         
         case 0x8000:
@@ -83,7 +83,7 @@ void Cpu::processNextInstruction(){
         break;
         
         case 0x9000: //SNE Vx, Vy
-            if(generalPurposeRegisters[(opCode & 0x0F00) >> 8] != generalPurposeRegisters[(opCode & 0x00F0) >> 4])
+            if(generalRegisters[(opCode & 0x0F00) >> 8] != generalRegisters[(opCode & 0x00F0) >> 4])
                 programCounter+=2;
         break;
         
