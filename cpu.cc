@@ -104,7 +104,6 @@ void Cpu::processNextInstruction(){
         case 0xB000:
             programCounter = (opCode & 0x0FFF) + generalRegisters[0];
         break;
-
         case 0xF000:
             switch(opCode & 0x00FF){
                 case 0xF007:
