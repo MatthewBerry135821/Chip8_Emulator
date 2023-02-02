@@ -10,7 +10,7 @@ System::System(){
 void System::testImplementation(){
     int testType;
     do{
-        cout << "what do test?\n\t1) opCoce\n\t2>dump CPU state\n\t-1)exit" << endl << endl;
+        cout << "\nTest Options:\n\t1) Test opCode\n\t2) Dump CPU state\n\t-1) Exit" << "\nEnter option: ";
         cin >> testType;
         switch(testType){
             case 1:
@@ -18,7 +18,7 @@ void System::testImplementation(){
                 std::cin.unsetf(std::ios::dec);
                 std::cin.unsetf(std::ios::hex);
                 std::cin.unsetf(std::ios::oct);
-                cout << "what opCode test? ";
+                cout << "Input opCode: ";
                 cin >> opCode;
                 memory.testForceSetNextInstruction(opCode);
                 cpu.processNextInstruction();
