@@ -28,7 +28,15 @@ void Cpu::processNextInstruction(){
                 programCounter+=2;
             }
         break;
-
+        
+        case 0x6000: //LD Vx, byte
+            generalPurposeRegisters[(opCode & 0x0F00) >> 8] = opCode & 0x00FF;
+        break;            
+        
+        case 0x7000: //ADD Vx, byte
+            generalPurposeRegisters[(opCode & 0x0F00) >> 8] = generalPurposeRegisters[(opCode & 0x0F00) >> 8] + opCode & 0x00FF;
+        break;
+        
         case 0x8000:
             switch(opCode & 0x000F){
                 case 0x0000: //8xy0 - LD Vx, Vy
@@ -73,7 +81,12 @@ void Cpu::processNextInstruction(){
                 break;
             }
         break;
-
+        
+        case 0x9000: //SNE Vx, Vy
+            if(generalPurposeRegisters[(opCode & 0x0F00) >> 8] != generalPurposeRegisters[(opCode & 0x00F0) >> 4])
+                programCounter+=2;
+        break;
+        
         case 0xA000:
              registerIndex = opCode & 0x0FFF;   
         break;
