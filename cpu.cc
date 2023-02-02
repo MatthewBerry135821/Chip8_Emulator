@@ -19,7 +19,7 @@ void Cpu::processNextInstruction(){
             programCounter = (opCode & 0x0FFF);
         break;
         
-        case 0x2000:
+        case 0x2000: //CALL addr
             
         break;
         
