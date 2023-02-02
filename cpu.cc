@@ -1,6 +1,7 @@
 #include "cpu.h"
 #include <cstdint>
 #include <iostream>
+#include <cstdlib>
 
 using namespace std;
 
@@ -64,6 +65,9 @@ void Cpu::processNextInstruction(){
         case 0xB000:
             programCounter = (opCode & 0x0FFF) + generalRegisters[0];
             break;
+        case 0xC000:
+            generalRegisters[(0x0F00 & opCode) >> 8] = (opCode & 0x00FF) & (rand() % 256);
+        break;
         case 0xF000:
             switch(opCode & 0x00FF){
                 case 0xF007:
