@@ -75,7 +75,7 @@ void Cpu::processNextInstruction(){
                     registerIndex += generalPurposeRegisters[opCode & 0x0F00 >> 8];
                     break;
                 case 0x0029:
-                    registerIndex = 
+                    registerIndex =  
                 case 0x0033:
                      
                     
