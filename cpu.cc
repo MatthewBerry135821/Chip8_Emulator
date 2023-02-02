@@ -20,9 +20,19 @@ void Cpu::processNextInstruction(){
         break;
         
         case 0x2000:
-
+            
         break;
-
+        
+        case 0x3000: //SE Vx, byte
+            if(generalRegisters[(opCode & 0x0F00) >> 8] == opCode & 0x00FF)
+                programCounter+=2;
+        break;
+        
+        case 0x4000: //SNE Vx, byte
+            if(generalRegisters[(opCode & 0x0F00) >> 8] != opCode & 0x00FF)
+                programCounter+=2;
+        break;
+        
         case 0x5000://skip mean go to next thing on list
             if(generalRegisters[(opCode & 0x0F00) >> 8] == generalRegisters[(opCode & 0x0F0) >> 4]){
                 programCounter+=2;
