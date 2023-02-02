@@ -1,3 +1,6 @@
 {
-    "cmake.sourceDirectory": "c:\\Users\\Matthew\\Documents\\school\\Personal Projects\\Chip 8\\Chip8_Emulator"
+    "cmake.sourceDirectory": "c:\\Users\\Matthew\\Documents\\school\\Personal Projects\\Chip 8\\Chip8_Emulator",
+    "files.associations": {
+        "cstdint": "cpp"
+    }
 }

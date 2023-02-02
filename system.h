@@ -1,3 +1,4 @@
+#include "input.h"
 #include "screen.h"
 #include "memory.h"
 #include "cpu.h"
@@ -13,6 +14,7 @@ class System{
         void testImplementation();
         friend class Cpu;
     private:
+        Input input;
         Screen screen;
         Memory memory;
         Cpu cpu;
