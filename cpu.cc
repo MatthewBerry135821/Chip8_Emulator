@@ -25,13 +25,15 @@ void Cpu::processNextInstruction(){
         break;
         
         case 0x3000: //SE Vx, byte
-            if(generalRegisters[(opCode & 0x0F00) >> 8] == opCode & 0x00FF)
+            if(generalRegisters[(opCode & 0x0F00) >> 8] == (opCode & 0x00FF)){
                 programCounter+=2;
+            }
         break;
         
         case 0x4000: //SNE Vx, byte
-            if(generalRegisters[(opCode & 0x0F00) >> 8] != opCode & 0x00FF)
+            if(generalRegisters[(opCode & 0x0F00) >> 8] != (opCode & 0x00FF)){
                 programCounter+=2;
+            }
         break;
         
         case 0x5000://skip mean go to next thing on list
@@ -41,11 +43,11 @@ void Cpu::processNextInstruction(){
         break;
         
         case 0x6000: //LD Vx, byte
-            generalRegisters[(opCode & 0x0F00) >> 8] = opCode & 0x00FF;
+            generalRegisters[(opCode & 0x0F00) >> 8] = (opCode & 0x00FF);
         break;            
         
         case 0x7000: //ADD Vx, byte
-            generalRegisters[(opCode & 0x0F00) >> 8] = generalRegisters[(opCode & 0x0F00) >> 8] + opCode & 0x00FF;
+            generalRegisters[(opCode & 0x0F00) >> 8] = generalRegisters[(opCode & 0x0F00) >> 8] + (opCode & 0x00FF);
         break;
         
         case 0x8000:
@@ -87,7 +89,7 @@ void Cpu::processNextInstruction(){
                 break;
                 
                 case 0x000E: //8xyE - SHL Vx {, Vy}
-                    registerVF = generalRegisters[(opCode & 0x0F00) >> 8] & 0x80 == 0x80;
+                    registerVF = (generalRegisters[(opCode & 0x0F00) >> 8] & 0x80) == 0x80;
                     generalRegisters[(opCode & 0x0F00) >> 8] = generalRegisters[(opCode & 0x0F00) >> 8] * 2;
                 break;
             }
@@ -99,7 +101,7 @@ void Cpu::processNextInstruction(){
         break;
         
         case 0xA000:
-             registerIndex = opCode & 0x0FFF;   
+             registerIndex = (opCode & 0x0FFF);   
         break;
 
         case 0xB000:
@@ -111,26 +113,25 @@ void Cpu::processNextInstruction(){
         case 0xF000:
             switch(opCode & 0x00FF){
                 case 0xF007:
-                    generalRegisters[opCode & 0x0F00 >> 8] = delayTimer;
+                    generalRegisters[(opCode & 0x0F00) >> 8] = delayTimer;
                 break;
 
                 case 0x000A:
                 break;
 
                 case 0x0015:
-                    delayTimer = generalRegisters[opCode & 0x0F00 >> 8];
+                    delayTimer = generalRegisters[(opCode & 0x0F00) >> 8];
                 break;
 
                 case 0x0018:
-                    soundTimer = generalRegisters[opCode & 0x0F00 >> 8];
+                    soundTimer = generalRegisters[(opCode & 0x0F00) >> 8];
                 break;
 
                 case 0x001E:
-                    registerIndex += generalRegisters[opCode & 0x0F00 >> 8];
+                    registerIndex += generalRegisters[(opCode & 0x0F00) >> 8];
                 break;
 
                 case 0x0029:
-                    registerIndex =  0;
                 break;
 
                 case 0x0033:
