@@ -23,6 +23,20 @@ void Cpu::processNextInstruction(){
 
         break;
 
+        case 0x3000:
+            if(generalRegisters[(0x0F00 & opCode) >> 8] == (opCode & 0x00FF))
+            {
+                programCounter += 0x2;
+            }
+        break;
+
+        case 0x4000:
+            if(generalRegisters[(0x0F00 & opCode) >> 8] != (opCode & 0x00FF))
+            {
+                programCounter += 0x2;
+            }
+        break;
+
         case 0x5000:
         //skip mean go to next thing on list
              
@@ -30,7 +44,12 @@ void Cpu::processNextInstruction(){
                 programCounter+=2;
             }
         break;
-
+        case 0x6000:
+            generalRegisters[(0x0F00 & opCode) >> 8] = (opCode & 0x00FF);
+        break;
+        case 0x7000:
+            generalRegisters[(0x0F00 & opCode) >> 8] += (opCode & 0x00FF);
+        break;
         case 0x8000:
             switch(opCode & 0x000F){
                 case 0x0000:
@@ -58,6 +77,12 @@ void Cpu::processNextInstruction(){
 
 
             }
+        case 0x9000:
+            if(generalRegisters[(0x0F00 & opCode) >> 8] != generalRegisters[(0x00F0 & opCode) >> 4])
+            {
+                programCounter+=2;
+            }
+        break;
         break;
         case 0xA000:
              registerIndex = opCode & 0x0FFF;   
