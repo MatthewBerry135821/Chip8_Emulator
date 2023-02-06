@@ -6,6 +6,7 @@
 #define MEMORY_H
 class Memory{
     public:
+        Memory();
         /**
          * @param name name of file containing program data
          * @return true program loaded 
